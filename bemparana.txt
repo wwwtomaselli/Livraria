@@ -1,0 +1,17 @@
+/usr/bin/php -S localhost:8000
+https://novatec.com.br/livros/padroes-projeto-php/
+https://novatec.com.br/livros/php-moderno/
+https://symfony.com/doc/master/setup.html#creating-symfony-applications-with-composer
+$(projeto)/bin/console server:start
+bin/console generate:bundle
+bin/console doctrine:database:create
+
+http://www.bemparana.com.br/noticia/477422/governo-suspende-venda-de-69-planos-de-saude-de-11-operadoras
+http://www.bemparana.com.br/noticia/477404/no-parana-numero-de-mulheres-no-mercado-formal-aumentou-17
+http://www.bemparana.com.br/noticia/477438/veiculos-com-estar-poderao-ter-ressarcimento-por-danos
+http://www.bemparana.com.br/noticia/477444/richa-anuncia-r-300-milhoes-a-fundo-perdido-para-pequenos-municipios
+http://www.bemparana.com.br/noticia/477413/publicada-lei-que-repassa-encargos-do-fies-para-instituicoes-de-ensino
+http://www.bemparana.com.br/fotos/657/aviao-cai-em-cemiterio-na-cidade-de-cruz-machado
+http://www.bemparana.com.br/noticia/477757/ancine-lanca-primeiro-edital-para-producao-de-jogos-eletronicos
+http://www.bemparana.com.br/noticia/477718/cisterna-lacrada-na-camara-escondia-documentos-sobre-derosso
+http://www.bemparana.com.br/noticia/477823/com-pt-no-comando-do-senado-lider-da-oposicao-fala-em-adiar-pec-do-teto

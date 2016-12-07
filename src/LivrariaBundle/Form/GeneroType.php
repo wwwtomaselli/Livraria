@@ -6,14 +6,14 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ProdutosType extends AbstractType
+class GeneroType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nome')->add('quantidade')->add('preco')->add('tipo')->add('imagem')->add('genero')        ;
+        $builder->add('nome')        ;
     }
     
     /**
@@ -22,7 +22,7 @@ class ProdutosType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'LivrariaBundle\Entity\Produtos'
+            'data_class' => 'LivrariaBundle\Entity\Genero'
         ));
     }
 
@@ -31,7 +31,7 @@ class ProdutosType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'livrariabundle_produtos';
+        return 'livrariabundle_genero';
     }
 
 

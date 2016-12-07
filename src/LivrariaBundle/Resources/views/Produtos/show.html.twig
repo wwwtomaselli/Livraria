@@ -1,7 +1,14 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Produto</h1>
+    <h1>Produto 
+        <a href="{{ path('produtos_index') }}" class="btn btn-primary" title="Voltar à lista">
+            <span class="glyphicon glyphicon-menu-hamburger"></span>
+        </a>
+        <a href="{{ path('produtos_edit', { 'id': produto.id }) }}" title="Editar" class="btn btn-default">
+            <span class="glyphicon glyphicon-pencil"></span>
+        </a>
+    </h1>
 
     <table class="table table-striped">
         <tbody>
@@ -32,17 +39,13 @@
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('produtos_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('produtos_edit', { 'id': produto.id }) }}">Edit</a>
-        </li>
-        <li>
+    
+            
+        
+            
+        
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+                <input type="submit" value="Excluir" class="btn btn-warning">
             {{ form_end(delete_form) }}
-        </li>
-    </ul>
+        
 {% endblock %}

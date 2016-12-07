@@ -5,6 +5,7 @@ namespace LivrariaBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class ProdutosType extends AbstractType
 {
@@ -13,7 +14,18 @@ class ProdutosType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nome')->add('quantidade')->add('preco')->add('tipo')->add('imagem')->add('genero')        ;
+        $builder
+                ->add('nome')
+                ->add('quantidade')
+                ->add('preco')
+                ->add('tipo', ChoiceType::Class, array(
+                    "choices" => array(
+                        'Livro' => 'Livro',
+                        'Revista' => 'Revista',
+                        'Quadrinho' => 'Quadrinho'
+                    )
+                ))
+                ->add('imagem')        ;
     }
     
     /**

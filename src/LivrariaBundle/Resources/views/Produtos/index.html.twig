@@ -29,9 +29,11 @@
                 <!-- td>{{ produto.imagem }}</td -->
                 <td>
                     <a href="{{ path('produtos_show', { 'id': produto.id }) }}" title="Ver detalhes" class="btn btn-default">
-                        <span class="glyphicon glyphicon-eye-open"></span></a>
+                        <span class="glyphicon glyphicon-eye-open"></span>
+                    </a>
                     <a href="{{ path('produtos_edit', { 'id': produto.id }) }}" title="Editar" class="btn btn-warning ">
-                        <span class="glyphicon glyphicon-pencil"></span></a>
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </a>
                 </td>
             </tr>
         {% endfor %}

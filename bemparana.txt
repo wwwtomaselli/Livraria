@@ -8,17 +8,14 @@ bin/console generate:bundle
 bin/console doctrine:database:create
 bin/console doctrine:generate:entities LivrariaBundle
 bin/console doctrine:schema:create
+bin/console doctrine:schema:update (para verificar a possibilidade de alteração)
+bin/console doctrine:schema:update --force (para alterar)
+bin/console doctrine:generate:crud
+bin/console doctrine:generate:form LivrariaBundle:Produtos (para recriar o formulário)
 
-http://www.bemparana.com.br/noticia/477438/veiculos-com-estar-poderao-ter-ressarcimento-por-danos
-http://www.bemparana.com.br/noticia/477413/publicada-lei-que-repassa-encargos-do-fies-para-instituicoes-de-ensino
-http://www.bemparana.com.br/noticia/477718/cisterna-lacrada-na-camara-escondia-documentos-sobre-derosso
-http://www.bemparana.com.br/politicaemdebate/index.php/2016/12/06/projeto-que-libera-entrada-de-animais-em-hospitais-provoca-saia-justa-na-assembleia/
-http://www.bemparana.com.br/noticia/477955/presidente-do-pt-pressiona-viana-para-adiar-votacao-da-pec-do-teto
-http://www.bemparana.com.br/fotos/658/natal-da-familia-moletta
 
-http://www.bemparana.com.br/noticia/477823/com-pt-no-comando-do-senado-lider-da-oposicao-fala-em-adiar-pec-do-teto
-http://www.bemparana.com.br/noticia/477941/senado-cancela-sessao-desta-terca-feira-apos-impasse-sobre-afastamento-de-renan
-http://www.bemparana.com.br/noticia/477935/senado-desafia-supremo-e-mantem-renan-na-presidencia-da-casa
+http://www.bemparana.com.br/noticia/478041/atraso-de-salarios-afeta-de-novo-transporte-coletivo-na-grande-curitiba
+http://www.bemparana.com.br/noticia/478010/reforma-da-previdencia-provoca-corrida-pela-aposentadoria-ja
 
 UML (Linguagem de Modelagem Unificada)
 Cobit Foundation

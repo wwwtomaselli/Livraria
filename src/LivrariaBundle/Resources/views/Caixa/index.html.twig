@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Frente da loja{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">
+                            <span class="glyphicon glyphicon-barcode"></span>
+                        </span>
+                        <input type="text" class="form-control"/>
+                        <span class="input-group-btn">
+                            <button class="btn btn-success" type="button" title="Enviar">
+                                <span class="glyphicon glyphicon-ok"></span>
+                            </button>
+                        </span>
+                    </div>
+                    
+                    <div class="thumbnail">
+                        <img src="http://lorempixel.com/240/240/" width="240" height="240" alt="...">
+                        <div class="caption">
+                            <h3>Nome do produto</h3>
+                            <p>Descrição do produto</p>
+                            <p>Preço unitário: R$999,99</p>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-8">
+            
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h4>
+                        <span class="glyphicon glyphicon-shopping-cart" ></span>
+                        Carrinho de compras
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    <ol>
+                        <li>Produto NomeProduto - Quantidade 1 - Valor R$ 999,99</li>
+                    </ol>
+                </div>
+                <div class="panel-footer">
+                    Total a pagar: R$ 0,00
+                </div>
+            </div>
+            
+            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal-estorno">Estornar item</button>
+            <button type="button" class="btn btn-danger">Cancelar item</button>
+            <button type="button" class="btn btn-success">Concluir venda</button>
+            
+        </div>
+    </div>
+
+<!-- janela modal dentro da página -->    
+<div id="modal-estorno" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+        
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Estorno de item</h4>
+      </div>
+        
+        <div class="modal-body">
+            <div class="form-group">
+                <label>Informe o número do item</label>
+                <input type="text" class="form-control"/>
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    Cancelar
+                </button>
+                <button type="button" class="btn btn-warning">Confirmar</button>
+            </div>
+        </div>
+        
+    </div>
+  </div>
+</div>
+{% endblock %}

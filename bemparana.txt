@@ -8,13 +8,17 @@ http://dilmesipsum.com.br
 $(projeto)/bin/console server:start
 bin/console generate:bundle
 bin/console doctrine:database:create
-bin/console doctrine:generate:entities LivrariaBundle
+bin/console doctrine:generate:entities LivrariaBundle[:Entidade (classe criada no diretório 'Entity')]
 bin/console doctrine:schema:create
 bin/console doctrine:schema:update (para verificar a possibilidade de alteração)
 bin/console doctrine:schema:update --force (para alterar)
 bin/console doctrine:generate:crud
 bin/console doctrine:generate:form LivrariaBundle:Produtos (para recriar o formulário)
 
+
+http://www.bemparana.com.br/noticia/478383/pessuti-contesta-condenacao-do-tce-para-devolver-r-313-milhoes
+http://www.bemparana.com.br/noticia/478415/so-o-parana-e-mais-dois-estados-tem-alta-na-producao-industrial
+http://www.bemparana.com.br/noticia/478305/praca-rui-barbosa-tem-arvore-de-sombrinhas
 
 UML (Linguagem de Modelagem Unificada)
 Cobit Foundation

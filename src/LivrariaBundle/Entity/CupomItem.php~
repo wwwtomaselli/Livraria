@@ -60,12 +60,6 @@ class CupomItem {
      * @ORM\Column(type="decimal", scale=2)
      */
     private $ValorUnitario;
-    
-    /**
-     *
-     * @ORM\Column(type="decimal", scale=2)
-     */
-    private $valorTotal;
 
     /**
      * Get id
@@ -219,5 +213,29 @@ class CupomItem {
     public function getOrdemItem()
     {
         return $this->ordemItem;
+    }
+
+    /**
+     * Set valorUnitario
+     *
+     * @param string $valorUnitario
+     *
+     * @return CupomItem
+     */
+    public function setValorUnitario($valorUnitario)
+    {
+        $this->ValorUnitario = $valorUnitario;
+
+        return $this;
+    }
+
+    /**
+     * Get valorUnitario
+     *
+     * @return string
+     */
+    public function getValorUnitario()
+    {
+        return $this->ValorUnitario;
     }
 }

@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use \LivrariaBundle\Entity\Cupom;
 use \LivrariaBundle\Entity\CupomItem;
+use \LivrariaBundle\Entity\Produtos;
 
 
 class CaixaController extends Controller
@@ -17,52 +18,72 @@ class CaixaController extends Controller
      */
     public function pdvAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
-        $cupom = new Cupom();
-        $cupom->setData(new \DateTime());
-        $cupom->setValorTotal(0);
-        $cupom->setVendedor(1);
+        $cupomId = $request->getSession()->get("cupom-id", null);
         
-        $em->persist($cupom); //neste momento gera o 'Id' da entidade
-        $em->flush();
-        
-        $request->getSession()->set("cupom-id", $cupom->getId());
-        
+        if(!$cupomId)
+        {
+            $cupom = new Cupom();
+            $cupom->setData(new \DateTime());
+            $cupom->setValorTotal(0);
+            $cupom->setVendedor(1);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($cupom); //neste momento gera o 'Id' da entidade
+            $em->flush();
+
+            $request->getSession()->set("cupom-id", $cupom->getId());
+        }
         
         
         return $this->render("LivrariaBundle:Caixa:index.html.twig");
     }
     
     /**
-     * @Route("/caixa/carregar")
+     * @Route("/caixa/carregar", name="pesquisar_produto")
      * @Method("POST")
      */
-public function carregarProdutoAction(Request $request, $item) //VERIFICAR!!!
+public function carregarProdutoAction(Request $request, $item)
     {
-        $codProd = $request->requests->get("codigo");
+        $codProd = $request->request->get("codigo");
         $em = $this->getDoctrine()->getManager();
         $produto = $em->getRepository('LivrariaBundle:Produtos')
                 ->find($codProd);
-        if ($produto == null)
+        $cupomId = $request->getSession()->get("cupom-id");
+        $cupom = $em->getRepository('LivrariaBundle:Cupom')
+                ->find($cupomId);
+        $quantItem = $em->getRepository('LivrariaBundle:CupomItem')
+                ->findBy(array("cupomId" => $cupomId));
+        
+        if ($produto instanceof Produtos)
         {
-            return $this->json('erro');
+            $novoItem = new CupomItem();
+            $novoItem->setCupomId($cupom);
+            $novoItem->setDescricaoItem($produto->getNome());
+            $novoItem->setItemCod($codProd);
+            $novoItem->setQuantidade(1);
+            $novoItem->setValorUnitario($produto->getPreco());
+            $novoItem->setOrdemItem(count($quantItem) + 1);
+            
+
+            $em->persist($novoItem);
+            $em->flush();
+            
+            $retorno['status'] = 'ok';
+            $retorno['produto'] = $produto;
+
+            
+        } else {
+            $retorno['status'] = 'erro';
+            $retorno['mensagem'] = "Produto não encontrado";
         }
-        $novoItem = new CupomItem();
-        $novoItem->setCupomId($request->getSession()->get("cupom-id"));
-        $novoItem->setItemCod($codProd);
-        $novoItem->setQuantidade(1);
-        $novoItem->setValorUnitario($produto->getPreco());
         
-        $em->persist($novoItem);
-        $em->flush();
-        
-        return $this->json('erro');
+        return $this->json($retorno);
     }
     
     /**
      * @Route("/caixa/estornar/{item}")
      */
-    public function estornarItemAction(Request $request, $item) //VERIFICAR!!!
+    public function estornarItemAction(Request $request, $item)
     {
         $cupomId = $request->getSession()->get("cupom-id");
         $em = $this->getDoctrine()->getManager();
@@ -120,7 +141,7 @@ public function carregarProdutoAction(Request $request, $item) //VERIFICAR!!!
     }
     
     /**
-     * @Route("/caixa/listar")
+     * @Route("/caixa/listar", name="listagem")
      */
     public function listarItensAction(Request $request)
     {

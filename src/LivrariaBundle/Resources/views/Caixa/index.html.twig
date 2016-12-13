@@ -61,8 +61,8 @@
             </div>
             
             <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal-estorno">Estornar item</button>
-            <button type="button" class="btn btn-danger">Cancelar item</button>
-            <button type="button" class="btn btn-primary">Concluir venda</button>
+            <a href="{{ path('cancelar') }}" type="button" class="btn btn-danger">Cancelar venda</a>
+            <a href="{{ path('concluir') }}" type="button" class="btn btn-primary">Concluir venda</a>
             
         </div>
     </div>
@@ -80,11 +80,11 @@
         <div class="modal-body">
             <div class="form-group">
                 <label>Informe o número do item</label>
-                <input type="text" class="form-control"/>
+                <input id="item-estornar" type="text" class="form-control"/>
                 <button type="button" class="btn btn-default" data-dismiss="modal">
                     Cancelar
                 </button>
-                <button type="button" class="btn btn-warning">Confirmar</button>
+                <button id="bt-confirmar-estorno" type="button" class="btn btn-warning">Confirmar</button>
             </div>
         </div>
         
@@ -116,6 +116,12 @@
                     }
                 });
             });
+            
+            $('#bt-confirmar-estorno').click(function(){
+                var numItem = $('#item-estornar').val();
+                location.href = "/caixa/estornar/" + numItem;
+            });
+            
         });
         
         
@@ -125,9 +131,9 @@
             $.getJSON("{{ path('listagem') }}", function(retorno){
                 var total = 0.0;
                 retorno.forEach(function(el, idx){
-                    var itemLista = $('<li>' + 
-                        el.numOrdem + ' - ' + 
-                        el.descricao + ' - ' + 
+                    var itemLista = $('<li> [' + 
+                        el.codigo + '] ' + 
+                        el.descricao + ' – R$ ' + 
                         el.valor + '</li>');
                     $('#lista-produtos').append(itemLista);
                     total += parseFloat(el.valor);

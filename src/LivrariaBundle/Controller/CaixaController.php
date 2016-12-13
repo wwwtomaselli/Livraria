@@ -81,6 +81,7 @@ public function carregarProdutoAction(Request $request, $item)
     }
     
     /**
+     * //Observacao: o mais adequado é comunicar o item a estornar via POST
      * @Route("/caixa/estornar/{item}")
      */
     public function estornarItemAction(Request $request, $item)
@@ -88,25 +89,32 @@ public function carregarProdutoAction(Request $request, $item)
         $cupomId = $request->getSession()->get("cupom-id");
         $em = $this->getDoctrine()->getManager();
         $itemEstornar = $em->getRepository('LivrariaBundle:CupomItem')
-                ->findBy(array(
+                ->findOneBy(array(
                     'cupomId' => $cupomId,
                     'ordemItem' => $item
                 ));
+        $quantItem = $em->getRepository('LivrariaBundle:CupomItem')
+                ->findBy(array("cupomId" => $cupomId));
+        $cupom = $em->getRepository('LivrariaBundle:Cupom')
+                ->find($cupomId);
         $itemEstorno = new CupomItem();
-        $itemEstorno->setCupomId($cupomId);
+        $itemEstorno->setCupomId($cupom);
         $itemEstorno->setDescricaoItem("Estorno do Item: $item");
-        $itemEstorno->setItemCod(1001); //código exclusivo para identificar estorno
-        $itemEstorno->setQuantidade(1);
-        $itemEstorno->setValorUnitario($itemEstornar->getValorUnitario() * -1);
+        $itemEstorno->setItemCod(9999); //código exclusivo para identificar estorno
+        $itemEstorno->setQuantidade(0);
+        $itemEstorno->setOrdemItem(count($quantItem) + 1);
+        $itemEstorno->setValorUnitario(-1 * $itemEstornar->getValorUnitario());
+        $itemEstornar->setQuantidade(0);
         
         $em->persist($itemEstorno);
+        $em->persist($itemEstornar);
         $em->flush();
         
-        return $this->json('ok');
+        return $this->redirectToRoute('caixa');
     }
     
     /**
-     * @Route("/caixa/cancelar")
+     * @Route("/caixa/cancelar", name="cancelar")
      */
     public function cancelarVendaAction(Request $request)
     {
@@ -118,26 +126,50 @@ public function carregarProdutoAction(Request $request, $item)
         $em->persist($cupom);
         $em->flush();
         
-        return $this->json('ok');
+        $request->getSession()->set("cupom-id", null);
+        return $this->redirectToRoute('caixa');
     }
     
     /**
-     * @Route("/caixa/finalizar")
+     * @Route("/caixa/finalizar", name="concluir")
      */
     public function finalizarVendaAction(Request $request)
     {
+        //obter o cupom a fechar e chamar a gestao do banco de dados
         $cupomId = $request->getSession()->get("cupom-id");
         $em = $this->getDoctrine()->getManager();
-        $cupom = $em->getRepository('LivrariaBundle:Cupom')->find($cupomId);
-        $cupom->setStatus('finalizado');
         
+        //calcular o total da compra e baixar o estoque
+        $valorTotal = 0.0;
+        $itens = $em->getRepository("LivrariaBundle:CupomItem")
+                ->findBy(array(
+                    "cupomId" => $request->getSession()->get("cupom-id")
+                ));
+        foreach($itens as $item)
+        {
+            $valorTotal += $item->getValorUnitario() * $item->getQuantidade();
+            $itemCod = $item->getItemCod();
+            if($itemCod != 9999)
+            {
+                $produto = $em->getRepository("LivrariaBundle:Produtos")
+                    ->find($itemCod);
+                $produto->setQuantidade($produto->getQuantidade()-1);
+                $em->persist($produto);
+            }
+        }
+        
+        //finalizar a compra
+        $cupom = $em->getRepository('LivrariaBundle:Cupom')->find($cupomId);
+        $cupom->setValorTotal($valorTotal);
+        $cupom->setStatus('finalizado');
         $em->persist($cupom);
+        
+        //gravar no banco de dados
         $em->flush();
         
-        //baixar os itens do estoque
-        //fechar o total da compra
-        
-        return $this->json('ok');
+        //retornar ao caixa para uma nova compra
+        $request->getSession()->set("cupom-id", null);
+        return $this->redirectToRoute('caixa');
     }
     
     /**

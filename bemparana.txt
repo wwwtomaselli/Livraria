@@ -4,6 +4,7 @@ https://novatec.com.br/livros/php-moderno/
 https://symfony.com/doc/master/setup.html#creating-symfony-applications-with-composer
 http://lorempixel.com/
 http://dilmesipsum.com.br
+https://www.google.com.br/webhp?&ie=UTF-8#q=other%20button%20colors%20bootstrap
 
 $(projeto)/bin/console server:start
 bin/console generate:bundle
@@ -15,7 +16,9 @@ bin/console doctrine:schema:update --force (para alterar)
 bin/console doctrine:generate:crud
 bin/console doctrine:generate:form LivrariaBundle:Produtos (para recriar o formulário)
 
-http://www.bemparana.com.br/noticia/478684/comissao-da-camara-rejeita-mais-uma-vez-regulamentacao-do-uber-em-curitiba
+http://www.bemparana.com.br/noticia/478883/onu-desiste-de-usar-mulher-maravilha
+http://www.bemparana.com.br/noticia/478873/anac-autoriza-empresas-aereas-a-cobrar-por-bagagens-despachadas
+http://www.bemparana.com.br/noticia/478830/nao-e-so-o-uber-novas-tecnologias-encurralam-taxis-em-curitiba
 http://www.bemparana.com.br/noticia/478305/praca-rui-barbosa-tem-arvore-de-sombrinhas
 
 UML (Linguagem de Modelagem Unificada)

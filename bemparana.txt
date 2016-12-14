@@ -2,6 +2,9 @@
 https://novatec.com.br/livros/padroes-projeto-php/
 https://novatec.com.br/livros/php-moderno/
 https://symfony.com/doc/master/setup.html#creating-symfony-applications-with-composer
+http://symfony.com/doc/current/bundles/FOSUserBundle/index.html
+http://symfony.com/doc/current/security.html
+http://symfony.com/doc/current/security/acl
 http://lorempixel.com/
 http://dilmesipsum.com.br
 https://www.google.com.br/webhp?&ie=UTF-8#q=other%20button%20colors%20bootstrap
@@ -15,6 +18,22 @@ bin/console doctrine:schema:update (para verificar a possibilidade de alteraçã
 bin/console doctrine:schema:update --force (para alterar)
 bin/console doctrine:generate:crud
 bin/console doctrine:generate:form LivrariaBundle:Produtos (para recriar o formulário)
+
+composer require friendsofsymfony/user-bundle "~2.0@dev"
+bin/console doctrine:generate:entities LivrariaBundle:User
+bin/console fos:user:create (para criar um usuário no sistema) [eumesmo]
+bin/console fos:user:promote eumesmo [(Responder) role: ROLE_ADMIN]
+bin/console fos:user:demote
+
+http://getbootstrap.com/examples/signin/
+http://bootsnipp.com/
+
+http://www.bemparana.com.br/noticia/479067/interior-bate-recorde-de-participacao-na-economia-do-parana
+http://www.bemparana.com.br/noticia/479069/parana-tem-oito-cidades-entre-as-100-maiores-economias
+http://www.bemparana.com.br/noticia/479038/manifestantes-deixam-rastro-de-vandalismo-no-centro-de-curitiba
+http://www.bemparana.com.br/noticia/479099/spoonrocket-chega-a-curitiba-para-competir-com-delivery-do-uber
+http://www.bemparana.com.br/noticia/479044/amazon-lanca-no-brasil-servico-de-video-concorrente-da-netflix
+http://universidadelinux.net.br/opendocument/2016/12/12/apache2-mysql-php-e-wordpress/
 
 http://www.bemparana.com.br/noticia/478883/onu-desiste-de-usar-mulher-maravilha
 http://www.bemparana.com.br/noticia/478873/anac-autoriza-empresas-aereas-a-cobrar-por-bagagens-despachadas

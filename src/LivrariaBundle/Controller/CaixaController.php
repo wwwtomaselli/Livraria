@@ -15,6 +15,7 @@ class CaixaController extends Controller
 {
     /**
      * @Route("/caixa", name="caixa")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function pdvAction(Request $request)
     {
